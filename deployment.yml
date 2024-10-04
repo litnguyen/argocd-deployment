@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: test-node-container
-        image: dahitsahadev/node-argocd:30
+        image: khangchi/node-argocd:latest
         ports:
         - containerPort: 4000
         env:
@@ -22,5 +22,4 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: test-node-config
-              key: PORT
-     
+              key: PORT     

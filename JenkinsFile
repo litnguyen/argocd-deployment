@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // Initialize variables
-        GIT_USERNAME = 'SahadevDahit'  // Update with your GitHub username
+        GIT_USERNAME = 'litnguyen'  // Update with your GitHub username
         GIT_TOKEN_CREDENTIALS_ID = 'access-token'  // Update with the ID of your GitHub PAT credential
     }
 
@@ -15,7 +15,7 @@ pipeline {
         stage('Clone repository') {
             steps {
                 // Specify the repository URL and branch explicitly
-                git branch: 'main', url: 'https://github.com/SahadevDahit/argocd-deployment.git'
+                git branch: 'main', url: 'https://github.com/litnguyen/argocd-deployment.git'
             }
         }
 
@@ -25,13 +25,13 @@ pipeline {
                     // Retrieve Jenkins credentials for GitHub using PAT
                     withCredentials([string(credentialsId: GIT_TOKEN_CREDENTIALS_ID, variable: 'GIT_TOKEN')]) {
                         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                            sh "git config user.email sahadevdahit123@gmail.com"
-                            sh "git config user.name SahadevDahit"
+                            sh "git config user.email khangnguyenchi194@gmail.com"
+                            sh "git config user.name litnguyen"
                             sh "cat deployment.yml"
-                            sh "sed -i 's+dahitsahadev/node-argocd.*+dahitsahadev/node-argocd:${params.DOCKERTAG}+g' deployment.yml"
+                            sh "sed -i 's+khangchi/node-argocd.*+khangchi/node-argocd:${params.DOCKERTAG}+g' deployment.yml"
                             sh "cat deployment.yml"
                             sh "git add ."
-                            sh "git commit -m 'Done by Jenkins Job changemanifest: ${params.DOCKERTAG}'"
+                            sh "git commit -m 'Done by Jenkins Job change manifest: ${params.DOCKERTAG}'"
                             sh "git push https://${GIT_USERNAME}:${GIT_TOKEN}@github.com/${GIT_USERNAME}/argocd-deployment.git HEAD:main"
                         }
                     }
