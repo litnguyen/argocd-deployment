@@ -7,11 +7,11 @@ spec:
   project: default
   source:
     repoURL: https://github.com/litnguyen/argocd-deployment.git
-    targetRevision: main
-    path: .
+    targetRevision: HEAD
+    path: ./
   destination:
     server: https://kubernetes.default.svc
-    namespace: myapp
+    namespace: myargo
   
   syncPolicy:
     syncOptions:
